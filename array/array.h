@@ -1,3 +1,16 @@
+/*
+ * Zeno Saletti
+ * 2024/01/08
+ * 
+ * Title: Variable-size array
+ * 
+ * Purpose: acquire awareness
+ * of how amortized time cost
+ * is relevant
+ * 
+ * Version: 1.0
+ */
+
 #ifndef ARRAY_H
 #define ARRAY_H
 
@@ -12,11 +25,15 @@ class array {
 
     public:
         array();
+        array(int c);
         ~array();
+        bool empty();
+        void add(int x);
+        int erase(int i);
         int size();
         void resize();
-        void add(int x);
-        void remove(int v);
+        bool remove(int v);
+        int get(int i);
 };
 
 #endif
