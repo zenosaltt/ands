@@ -1,6 +1,19 @@
 #include "array.h"
 #include <cassert>
 
+void array::shrink()
+{
+    capacity /= 2;
+    int * buffer = new int[capacity];
+
+    for (int i = 0; i < current; i++) {
+        buffer[i] = A[i];
+    }
+
+    delete [] A;
+    A = buffer;
+}
+
 //Array constructor
 array::array()
 {
@@ -89,8 +102,8 @@ bool array::remove(int v)
         }
     }
 
-    if ((float)current/capacity <= 0.25) {
-        capacity /= 2;
+    if ((float)current / capacity <= L_FACTOR) {
+        shrink();
     }
 
     return found;
@@ -105,7 +118,7 @@ bool array::remove(int v)
 //make your machine explode)
 int array::get(int i)
 {
-    assert(0 <= i && i < current);
+    assert(0 <= i && i < current && "Specified index exceeds boundaries.");
 
     return A[i];
 }
@@ -114,15 +127,15 @@ int array::get(int i)
 //Return its value
 int array::erase(int i)
 {
-    assert(0 <= i && i < current);
+    assert(0 <= i && i < current && "Specified index exceeds boundaries.");
 
     int tmp = A[i];
 
     A[i] = A[current - 1];
     current--;
 
-    if ((float)current/capacity <= 0.25) {
-        capacity /= 2;
+    if ((float)current / capacity <= L_FACTOR) {
+        shrink();
     }
 
     return tmp;

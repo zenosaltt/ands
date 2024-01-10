@@ -9,6 +9,7 @@
  * is relevant
  * 
  * Version: 1.0
+ *          1.1 shrink()
  */
 
 #ifndef ARRAY_H
@@ -19,9 +20,13 @@ class array {
     private:
         const int I_CAPACITY = 1;
         const float E_FACTOR = 2.0;
+        const float L_FACTOR = 0.25;
+
         int capacity;
         int current;
         int *A;
+
+        void shrink();
 
     public:
         array();
