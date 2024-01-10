@@ -10,9 +10,6 @@
 #ifndef ARRAYQUEUE_H
 #define ARRAYQUEUE_H
 
-#define SHRINK 0
-#define EXPAND 1
-
 class arrayqueue {
 
     private:
@@ -21,17 +18,15 @@ class arrayqueue {
         const float L_FACTOR = 0.25;
 
         int * A;
-        
-        int c_size;
-        int door; //A[door]: next slot to be overwritten
-        int exit; //A[exit]: head of the queue
+        int capacity; //allocated space for A
+        int door;     //A[door]: next slot to be overwritten
+        int exit;     //A[exit]: head of the queue
 
         int succ(int i);
         bool full();
         void resize(bool expand);
 
     public:
-        int capacity;
         arrayqueue();
         ~arrayqueue();
 
@@ -41,7 +36,7 @@ class arrayqueue {
         bool empty();
         int size();
 
-        void print();
+        //void print();
 };
 
 #endif

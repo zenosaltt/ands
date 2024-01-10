@@ -1,41 +1,34 @@
 #include "arrayqueue.h"
 #include <cassert>
-#include <iostream>
+
+#define SHRINK 0
+#define EXPAND 1
 
 void arrayqueue::resize(bool expand)
 {
+    int * buffer;
+    int new_capacity;
+
     if (expand) {
-
-        int * buffer = new int[(int)(capacity * E_FACTOR)];
-
-        for (int i = exit, j = 0; i != door; i = succ(i), j++) {
-            buffer[j] = A[i];
-        }
-
-        delete [] A;
-        A = buffer;
-
-        capacity *= E_FACTOR;
-
-        exit = 0;
-        door = c_size;
-
+        new_capacity = capacity * E_FACTOR;
     } else {
-
-        int * buffer = new int[capacity / 2];
-
-        for (int i = exit, j = 0; i != door; i = succ(i), j++) {
-            buffer[j] = A[i];
-        }
-
-        delete [] A;
-        A = buffer;
-
-        capacity /= 2;
-
-        exit = 0;
-        door = c_size;
+        new_capacity = capacity / 2;
     }
+
+    buffer = new int[new_capacity];
+
+    for (int i = exit, j = 0; i != door; i = succ(i), j++) {
+        buffer[j] = A[i];
+    }
+
+    delete [] A;
+    A = buffer;
+
+                              // NEVER CHANGE THIS SEQUENCE
+    door = size();            // #1
+    exit = 0;                 // #2
+
+    capacity = new_capacity;  // #3
 }
 
 int arrayqueue::succ(int i)
@@ -53,7 +46,6 @@ arrayqueue::arrayqueue()
     A = new int[I_CAPACITY];
     
     capacity = I_CAPACITY;
-    c_size = 0;
 
     door = 0;
     exit = 0;
@@ -74,7 +66,6 @@ void arrayqueue::enqueue(int x)
 
     A[door] = x;
     door = succ(door);
-    c_size++;
 }
 
 int arrayqueue::dequeue()
@@ -84,11 +75,10 @@ int arrayqueue::dequeue()
     int tmp = A[exit];
 
     exit = succ(exit);
-    c_size--;
 
-    //if ((float)c_size / capacity <= L_FACTOR) {
-    //    resize(SHRINK);
-    //}
+    if ((float)size() / capacity <= L_FACTOR) {
+        resize(SHRINK);
+    }
 
     return tmp;
 }
@@ -109,18 +99,23 @@ bool arrayqueue::empty()
 
 int arrayqueue::size()
 {
-    //current size may
-    //be omitted, if
-    //some additional
-    //calculation on
-    //door and exit is
-    //carried out
-    //(modular arithmetic
-    //is involved though :/ ) 
-    return c_size;
+    /*
+    current size may
+    be omitted, if
+    some additional
+    calculation on
+    door and exit is
+    carried out
+    (modular arithmetic
+    is involved though :/ )
+    */
+    
+    //return c_size;
+
+    return (door >= exit ? door - exit : door - exit + capacity);
 }
 
-
+/*
 void arrayqueue::print()
 {
     std::cout << "Testa coda: ";
@@ -129,3 +124,4 @@ void arrayqueue::print()
     }
     std::cout << std::endl;
 }
+*/
