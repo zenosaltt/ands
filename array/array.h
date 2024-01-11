@@ -26,7 +26,7 @@ class array {
         int current;
         int *A;
 
-        void shrink();
+        void resize(bool expand);
 
     public:
         array();

@@ -1,9 +1,17 @@
 #include "array.h"
 #include <cassert>
 
-void array::shrink()
+#define EXPAND 1
+#define SHRINK 0
+
+void array::resize(bool expand)
 {
-    capacity /= 2;
+    if (expand) {
+        capacity *= E_FACTOR;
+    } else {
+        capacity /= 2;
+    }
+
     int * buffer = new int[capacity];
 
     for (int i = 0; i < current; i++) {
@@ -55,20 +63,12 @@ void array::resize()
 
 //Add a new element with value x
 //to the array. Expand the array
-//if space is needed
+//if space is needed (x is appended
+//to the back of A)
 void array::add(int x)
 {
     if (current >= capacity) {
-
-        capacity *= E_FACTOR;
-        int * buffer = new int[capacity];
-
-        for (int i = 0; i < current; i++) {
-            buffer[i] = A[i];
-        }
-
-        delete [] A;
-        A = buffer;
+        resize(EXPAND);
     }
 
     A[current] = x;
@@ -103,7 +103,7 @@ bool array::remove(int v)
     }
 
     if ((float)current / capacity <= L_FACTOR) {
-        shrink();
+        resize(SHRINK);
     }
 
     return found;
@@ -135,7 +135,7 @@ int array::erase(int i)
     current--;
 
     if ((float)current / capacity <= L_FACTOR) {
-        shrink();
+        resize(SHRINK);
     }
 
     return tmp;
