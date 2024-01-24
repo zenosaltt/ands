@@ -1,4 +1,5 @@
 #include "sort.h"
+#include "../heap/heap.h"
 
 static void swap(int &a, int &b)
 {
@@ -40,7 +41,7 @@ void insertionsort(int A[], int n)
 
     for (i = 1; i < n; i++) {
         tmp = A[i];
-        for (j = i; j - 1 >= 0 && A[j - 1] > tmp; j--) {
+        for (j = i; j > 0 && A[j - 1] > tmp; j--) {
             A[j] = A[j - 1];
         }
         A[j] = tmp;
@@ -108,5 +109,72 @@ void gnomesort(int A[], int n)
             swap(A[i], A[i - 1]);
             i--;
         }
+    }
+}
+
+/*
+ * Merge sort
+ */
+static void merge(int A[], int start, int mid, int end)
+{
+    int size = end - start + 1;
+    int * s = new int[size];
+
+    int i = start, j = mid + 1, k = 0;
+
+    while (i <= mid && j <= end) {
+        
+        if (A[i] < A[j]) {
+            s[k] = A[i];
+            i++;
+        } else {
+            s[k] = A[j];
+            j++;
+        }
+        
+        k++;
+    }
+
+    while (i <= mid) {
+        s[k] = A[i];
+        i++;
+        k++;
+    }
+
+    while (j <= end) {
+        s[k] = A[j];
+        j++;
+        k++;
+    }
+
+    for (i = start, k = 0; i <= end; i++, k++) {
+        A[i] = s[k];
+    }
+
+    delete [] s;
+}
+
+static void mergesort_rec(int A[], int i, int j)
+{
+    if (i < j) {
+        int m = (i + j) / 2;
+        mergesort_rec(A, i, m);
+        mergesort_rec(A, m + 1, j);
+        merge(A, i, m, j);
+    }
+}
+
+void mergesort(int A[], int n)
+{
+    mergesort_rec(A, 0, n - 1);
+}
+
+void heapsort(int A[], int n)
+{
+    heapify(A, n);
+
+    for (int i = n - 1; i > 0; i--) {
+        swap(A[0], A[i]);
+        siftdown(A, i, 0);
     }
 }
