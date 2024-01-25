@@ -104,6 +104,18 @@ void bubblesort2(int A[], int n)
     }
 }
 
+void combsort(int A[], int n)
+{
+    const float SHRINK_FACTOR = 1.3; //suggested value according to the authors
+
+    for (int gap = n / SHRINK_FACTOR; gap > 0; gap /= SHRINK_FACTOR) {
+        for (int i = gap; i < n; i++) {
+            if (A[i] < A[i - gap])
+                swap(A[i], A[i - gap]);
+        }
+    }
+}
+
 /*
  * Carrying out a sorting operation
  * with only one 'while' cycle may
