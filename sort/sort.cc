@@ -48,6 +48,25 @@ void insertionsort(int A[], int n)
     }
 }
 
+/*
+ * Interesting generalization of
+ * insertion sort
+ */
+void shellsort(int A[], int n)
+{
+    int tmp, i, j, gap;
+
+    for (gap = n / 2; gap > 0; gap /= 2) {
+        for (i = gap; i < n; i++) {
+            tmp = A[i];
+            for (j = i; j - gap >= 0 && A[j - gap] > tmp; j -= gap) {
+                A[j] = A[j - gap];
+            }
+            A[j] = tmp;
+        }
+    }
+}
+
 void bubblesort(int A[], int n)
 {
     for (int i = n - 1; i > 0; i--) {

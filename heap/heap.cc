@@ -48,6 +48,7 @@ void siftdown(int A[], int n, int i)
     bool fixed;
 
     do {
+
         fixed = true;
         max = i;
 
