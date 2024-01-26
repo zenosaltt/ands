@@ -209,3 +209,25 @@ void heapsort(int A[], int n)
         siftdown(A, i, 0);
     }
 }
+
+void cocktailsort(int A[], int n)
+{
+    int lower = 0, upper = n - 1, i;
+
+    while (lower < upper) {
+
+        for (i = lower; i < upper; i++) {
+            if (A[i] > A[i + 1])
+                swap(A[i], A[i + 1]);
+        }
+
+        upper--;
+
+        for (i = upper; i > lower; i--) {
+            if (A[i] < A[i - 1])
+                swap(A[i], A[i - 1]);
+        }
+
+        lower++;
+    }
+}
