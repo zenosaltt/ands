@@ -231,3 +231,46 @@ void cocktailsort(int A[], int n)
         lower++;
     }
 }
+
+static int partition(int A[], int l, int u, bool avoid_worst_cases)
+{
+    if (avoid_worst_cases) {
+        int m = (l + u) / 2;
+
+        if (A[l] > A[u])
+            swap(A[l], A[u]);
+        if (A[m] > A[u])
+            swap(A[m], A[u]);
+        if (A[m] > A[l])
+            swap(A[m], A[l]);
+    }
+
+    int pivot = A[l];
+    int j = l;
+
+    for (int i = l + 1; i <= u; i++) {
+        if (A[i] < pivot) {
+            j++;
+            swap(A[i], A[j]);
+        }
+    }
+
+    A[l] = A[j];
+    A[j] = pivot;
+
+    return j;
+}
+
+static void quicksort_rec(int A[], int i, int j)
+{
+    if (i < j) {
+        int pivot = partition(A, i, j, false);
+        quicksort_rec(A, i, pivot - 1);
+        quicksort_rec(A, pivot + 1, j);
+    }
+}
+
+void quicksort(int A[], int n)
+{
+    quicksort_rec(A, 0, n - 1);
+}

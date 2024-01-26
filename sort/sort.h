@@ -10,6 +10,7 @@ void cocktailsort(int A[], int n);
 void combsort(int A[], int n);
 void shellsort(int A[], int n);
 
+void quicksort(int A[], int n);
 void mergesort(int A[], int n);
 void heapsort(int A[], int n);
 
