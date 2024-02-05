@@ -274,3 +274,11 @@ void quicksort(int A[], int n)
 {
     quicksort_rec(A, 0, n - 1);
 }
+
+void stalinsort(int A[], int n)
+{
+    for (int i = 0; i < n - 1; i++) {
+        if (A[i + 1] < A[i])
+            A[i + 1] = A[i];
+    }
+}
