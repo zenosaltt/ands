@@ -17,11 +17,11 @@ static int r(int i)
     return 2 * i + 2;
 }
 
-static void swap(int A[], int i, int j)
+static void swap(int &i, int &j)
 {
-    int tmp = A[i];
-    A[i] = A[j];
-    A[j] = tmp;
+    int tmp = i;
+    i = j;
+    j = tmp;
 }
 
 /* RECURSIVE
@@ -42,7 +42,7 @@ void siftdown(int A[], int n, int i)
 }
 */
 
-void siftdown(int A[], int n, int i)
+void siftdown(int * A, int n, int i)
 {
     int max;
     bool fixed;
@@ -58,7 +58,7 @@ void siftdown(int A[], int n, int i)
             max = r(i);
 
         if (max != i) {
-            swap(A, i, max);
+            swap(A[i], A[max]);
             i = max;
             fixed = false;
         }
@@ -66,15 +66,22 @@ void siftdown(int A[], int n, int i)
     } while (!fixed);
 }
 
+void siftup(int * A, int i)
+{
+    while (i > 0 && A[i] > A[p(i)]) {
+        swap(A[i], A[p(i)]);
+        i = p(i);
+    }
+}
 
-void heapify(int A[], int n)
+void heapify(int * A, int n)
 {
     for (int i = n / 2 - 1; i >= 0; i--)
         siftdown(A, n, i);
 }
 
 
-static void prnt(int A[], int n, int space, int i)
+static void prnt(int * A, int n, int space, int i)
 {
     if (i < n) {
         space += 5;
@@ -87,7 +94,7 @@ static void prnt(int A[], int n, int space, int i)
     }
 }
 
-void print(int A[], int n)
+void print(int * A, int n)
 {
     prnt(A, n, 0, 0);
 }
