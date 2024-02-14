@@ -8,6 +8,14 @@ struct btree {
     btree *right;
 
     int k;
+    int v;
+
+    btree();
+    btree(int k);
+    btree(int k, int v);
+    ~btree();
+    void insertLeft(btree *t);
+    void insertRight(btree *t);
 };
 
 #endif

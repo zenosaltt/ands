@@ -50,3 +50,26 @@ void bfs(btree *t)
             Q.push(u->right);
     }
 }
+
+void btree::insertLeft(btree *t)
+{
+    if (left != nullptr) {
+        t->parent = this;
+        this->left = t;
+    }
+}
+
+void btree::insertRight(btree *t)
+{
+    if (right != nullptr) {
+        t->parent = this;
+        this->right = t;
+    }
+}
+
+btree::btree()
+{
+    this->parent = nullptr;
+    this->left = nullptr;
+    this->right = nullptr;
+}
