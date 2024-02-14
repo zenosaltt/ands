@@ -4,6 +4,15 @@ using namespace std;
 
 void dfs(btree *t)
 {
+    if (nullptr == t)
+        return;
+    // pre
+    dfs(t->left);
+    // in
+    dfs(t->right);
+    // post
+
+    /*
     if (t != nullptr) {
         //pre
         dfs(t->left);
@@ -11,6 +20,7 @@ void dfs(btree *t)
         dfs(t->right);
         //post
     }
+    */
 }
 
 int count(btree *t)
