@@ -1,4 +1,6 @@
 #include "btree.h"
+#include <queue>
+using namespace std;
 
 void dfs(btree *t)
 {
@@ -21,5 +23,20 @@ int count(btree *t)
 
 void bfs(btree *t)
 {
+    queue<btree*> Q;
 
+    if (t != nullptr)
+        Q.push(t);
+
+    while (!Q.empty()) {
+        
+        btree *u = Q.front(); Q.pop();
+        // then do something to u
+
+        // then visit its children:
+        if (u->left != nullptr)
+            Q.push(u->left);
+        if (u->right != nullptr)
+            Q.push(u->right);
+    }
 }
