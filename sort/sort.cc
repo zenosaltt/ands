@@ -1,5 +1,6 @@
 #include "sort.h"
 #include "../heap/heap.h"
+#include <math.h>
 
 static void swap(int &a, int &b)
 {
@@ -280,5 +281,29 @@ void stalinsort(int A[], int n)
     for (int i = 0; i < n - 1; i++) {
         if (A[i + 1] < A[i])
             A[i + 1] = A[i];
+    }
+}
+
+void oddevensort(int A[], int n)
+{
+    bool sorted = false;
+
+    while (!sorted) {
+
+        sorted = true;
+
+        for (int i = 1; i < n - 1; i += 2) {
+            if (A[i] > A[i + 1]) {
+                swap(A[i], A[i + 1]);
+                sorted = false;
+            }
+        }
+
+        for (int i = 0; i < n; i += 2) {
+            if (A[i] > A[i + 1]) {
+                swap(A[i], A[i + 1]);
+                sorted = false;
+            }
+        }
     }
 }
