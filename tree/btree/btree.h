@@ -7,8 +7,8 @@ struct btree {
     btree *left;
     btree *right;
 
-    int k;
-    int v;
+    int k; //key for binary search trees
+    int v; //actual content of the node
 
     btree();
     btree(int k);
