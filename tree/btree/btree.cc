@@ -1,6 +1,40 @@
 #include "btree.h"
 #include <queue>
+#include <iostream>
 using namespace std;
+
+btree *Btree()
+{
+    btree *t = new btree;
+    t->parent = nullptr;
+    t->left = nullptr;
+    t->right = nullptr;
+
+    return t;
+}
+
+btree *Btree(int k)
+{
+    btree *t = Btree();
+    t->k = k;
+    return t;
+}
+
+btree *Btree(int k, int v)
+{
+    btree *t = Btree(k);
+    t->v = v;
+    return t;
+}
+
+void deleteTree(btree *t)
+{
+    if (t != nullptr) {
+        deleteTree(t->left);
+        deleteTree(t->right);
+        delete t;
+    }
+}
 
 void dfs(btree *t)
 {
@@ -49,27 +83,4 @@ void bfs(btree *t)
         if (u->right != nullptr)
             Q.push(u->right);
     }
-}
-
-void btree::insertLeft(btree *t)
-{
-    if (left != nullptr) {
-        t->parent = this;
-        this->left = t;
-    }
-}
-
-void btree::insertRight(btree *t)
-{
-    if (right != nullptr) {
-        t->parent = this;
-        this->right = t;
-    }
-}
-
-btree::btree()
-{
-    this->parent = nullptr;
-    this->left = nullptr;
-    this->right = nullptr;
 }

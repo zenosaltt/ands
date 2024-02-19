@@ -9,13 +9,12 @@ struct btree {
 
     int k;
     int v;
-
-    btree();
-    btree(int k);
-    btree(int k, int v);
-    ~btree();
-    void insertLeft(btree *t);
-    void insertRight(btree *t);
 };
+
+btree *Btree();
+btree *Btree(int k);
+btree *Btree(int k, int v);
+
+void deleteTree(btree *t);
 
 #endif
