@@ -1,3 +1,11 @@
+/*
+ * This library contains some
+ * popular sorting algorithms,
+ * some of which may be less
+ * useful than others but
+ * nonetheless funny.
+ */
+
 #ifndef SORT_H
 #define SORT_H
 
