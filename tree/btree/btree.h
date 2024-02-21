@@ -17,4 +17,20 @@ btree *Btree(int k, int v);
 
 void deleteTree(btree *t);
 
+//returns the node with key k
+//(null if k is not there)
+btree *lookup(btree *t, int k);
+
+btree *min(btree *t);
+btree *max(btree *t);
+
+btree *succ(btree *t);
+//btree *prev(btree *t);
+
+btree *insert(btree *t, int k);
+btree *insert(btree *t, int k, int v);
+btree *erase(btree *t, int k);
+
+void print(btree *t, bool tree_like);
+
 #endif
