@@ -1,0 +1,8 @@
+# no executables
+
+*.out
+
+
+# no test files
+
+test.cc
