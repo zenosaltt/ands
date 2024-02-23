@@ -307,3 +307,23 @@ void oddevensort(int A[], int n)
         }
     }
 }
+
+static bool ascendingOrder(int A[], int n)
+{
+    bool sorted = true;
+    int i = 0;
+
+    while (i < n - 1 && sorted) {
+        if (A[i] > A[i + 1])
+            sorted = false;
+        i++;
+    }
+
+    return sorted;
+}
+
+void miraclesort(int A[], int n)
+{
+    while (!ascendingOrder(A, n));
+    //wait for a miracle
+}

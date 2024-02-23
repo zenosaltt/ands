@@ -26,5 +26,6 @@ void heapsort(int A[], int n);
 void bubblesort2(int A[], int n);
 
 void stalinsort(int A[], int n);
+void miraclesort(int A[], int n);
 
 #endif
