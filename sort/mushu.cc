@@ -4,9 +4,9 @@ using namespace std;
 
 int main() {
 
-    int array[] = {73, 62};
+    int array[] = {2, 1};
 
-    oddevensort(array, 2);
+    miraclesort(array, 2);
 
     for (int i = 0; i < 2; i++)
         cout << array[i] << " ";

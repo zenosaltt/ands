@@ -1,5 +1,5 @@
-#ifndef BTREE_H
-#define BTREE_H
+#ifndef BSTREE_H
+#define BSTREE_H
 
 struct btree {
 

@@ -278,9 +278,9 @@ void quicksort(int A[], int n)
 
 void stalinsort(int A[], int n)
 {
-    for (int i = 0; i < n - 1; i++) {
-        if (A[i + 1] < A[i])
-            A[i + 1] = A[i];
+    for (int i = 1; i < n; i++) {
+        if (A[i] < A[i - 1])
+            A[i] = A[i - 1];
     }
 }
 
@@ -325,5 +325,4 @@ static bool ascendingOrder(int A[], int n)
 void miraclesort(int A[], int n)
 {
     while (!ascendingOrder(A, n));
-    //wait for a miracle
 }

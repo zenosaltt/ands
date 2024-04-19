@@ -11,9 +11,12 @@ class matrix {
         matrix(int R, int C);
         ~matrix();
         void print();
+        void scale(int k);
 };
 
+matrix * sum(matrix &A, matrix &B);
 matrix * prod(matrix &A, matrix &B);
 matrix * strassen(matrix &A, matrix &B);
+int det(matrix &A);
 
 #endif
