@@ -1,36 +1,36 @@
 #ifndef BSTREE_H
 #define BSTREE_H
 
-struct btree {
+struct bstree {
 
-    btree *parent;
-    btree *left;
-    btree *right;
+    bstree *parent;
+    bstree *left;
+    bstree *right;
 
     int k; //key for binary search trees
     int v; //actual content of the node
 };
 
-btree *Btree();
-btree *Btree(int k);
-btree *Btree(int k, int v);
+bstree *Bstree();
+bstree *Bstree(int k);
+bstree *Bstree(int k, int v);
 
-void deleteTree(btree *t);
+void deleteTree(bstree *t);
 
 //returns the node with key k
 //(null if k is not there)
-btree *lookup(btree *t, int k);
+bstree *lookup(bstree *t, int k);
 
-btree *min(btree *t);
-btree *max(btree *t);
+bstree *min(bstree *t);
+bstree *max(bstree *t);
 
-btree *succ(btree *t);
-//btree *prev(btree *t);
+bstree *succ(bstree *t);
+//bstree *prev(bstree *t);
 
-btree *insert(btree *t, int k);
-btree *insert(btree *t, int k, int v);
-btree *erase(btree *t, int k);
+bstree *insert(bstree *t, int k);
+bstree *insert(bstree *t, int k, int v);
+bstree *erase(bstree *t, int k);
 
-void print(btree *t, bool tree_like);
+void print(bstree *t, bool tree_like);
 
 #endif

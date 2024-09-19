@@ -1,11 +1,11 @@
-#include "btree.h"
+#include "bstree.h"
 #include <queue>
 #include <iostream>
 using namespace std;
 
-btree *Btree()
+bstree *Bstree()
 {
-    btree *t = new btree;
+    bstree *t = new bstree;
     t->parent = nullptr;
     t->left = nullptr;
     t->right = nullptr;
@@ -13,21 +13,21 @@ btree *Btree()
     return t;
 }
 
-btree *Btree(int k)
+bstree *Bstree(int k)
 {
-    btree *t = Btree();
+    bstree *t = Bstree();
     t->k = k;
     return t;
 }
 
-btree *Btree(int k, int v)
+bstree *Bstree(int k, int v)
 {
-    btree *t = Btree(k);
+    bstree *t = bstree(k);
     t->v = v;
     return t;
 }
 
-void deleteTree(btree *t)
+void deleteTree(bstree *t)
 {
     if (t != nullptr) {
         deleteTree(t->left);
@@ -36,7 +36,7 @@ void deleteTree(btree *t)
     }
 }
 
-btree *lookup(btree *t, int k)
+bstree *lookup(bstree *t, int k)
 {
     while (t != nullptr && t->k != k) {
         if (k < t->k)
@@ -48,7 +48,7 @@ btree *lookup(btree *t, int k)
     return t;
 }
 
-btree *min(btree *t)
+bstree *min(bstree *t)
 {
     if (t == nullptr)
         return nullptr;
@@ -58,7 +58,7 @@ btree *min(btree *t)
     return t;
 }
 
-btree *max(btree *t)
+bstree *max(bstree *t)
 {
     if (t == nullptr)
         return nullptr;
@@ -68,7 +68,7 @@ btree *max(btree *t)
     return t;
 }
 
-btree *succ(btree *t)
+bstree *succ(bstree *t)
 {
     if (t == nullptr)
         return nullptr;
@@ -76,7 +76,7 @@ btree *succ(btree *t)
     if (t->right != nullptr)
         return min(t->right);
     
-    btree *p = t->parent;
+    bstree *p = t->parent;
     while (p != nullptr && p->right == t) {
         t = p;
         p = p->parent;
@@ -85,7 +85,7 @@ btree *succ(btree *t)
     return p;
 }
 
-void link(btree *p, btree *u, int k)
+void link(bstree *p, bstree *u, int k)
 {
     if (u != nullptr)
         u->parent = p;
@@ -97,10 +97,10 @@ void link(btree *p, btree *u, int k)
     }
 }
 
-btree *insert(btree *t, int k)
+bstree *insert(bstree *t, int k)
 {
-    btree *p = nullptr;
-    btree *u = t;
+    bstree *p = nullptr;
+    bstree *u = t;
 
     while (u != nullptr && u->k != k) {
         p = u;
@@ -108,7 +108,7 @@ btree *insert(btree *t, int k)
     }
 
     if (u == nullptr) {
-        btree *n = Btree(k);
+        bstree *n = bstree(k);
         link(p, n, k);
         if (p == nullptr)
             t = n;
@@ -118,10 +118,10 @@ btree *insert(btree *t, int k)
 }
 
 
-btree *insert(btree *t, int k, int v)
+bstree *insert(bstree *t, int k, int v)
 {
-    btree *p = nullptr;
-    btree *u = t;
+    bstree *p = nullptr;
+    bstree *u = t;
 
     while (u != nullptr && u->k != k) {
         p = u;
@@ -131,7 +131,7 @@ btree *insert(btree *t, int k, int v)
     if (u != nullptr && u->k == k) {
         u->v = v;
     } else {
-        btree *n = Btree(k, v);
+        bstree *n = bstree(k, v);
         link(p, n, k);
         if (p == nullptr)
             t = n;
@@ -141,9 +141,9 @@ btree *insert(btree *t, int k, int v)
 }
 
 
-btree *erase(btree *t, int k)
+bstree *erase(bstree *t, int k)
 {
-    btree *u = lookup(t, k); //find node to delete
+    bstree *u = lookup(t, k); //find node to delete
 
     if (u != nullptr) { //if it was found...
 
@@ -151,7 +151,7 @@ btree *erase(btree *t, int k)
             link(u->parent, nullptr, k);
             delete u;
         } else if (u->left != nullptr && u->right != nullptr) {
-            btree *s = succ(u);
+            bstree *s = succ(u);
             link(s->parent, s->right, s->k);
             u->k = s->k;
             u->v = s->v;
@@ -166,7 +166,7 @@ btree *erase(btree *t, int k)
     return t;
 }
 
-void dfs(btree *t)
+void dfs(bstree *t)
 {
     if (nullptr == t)
         return;
@@ -187,7 +187,7 @@ void dfs(btree *t)
     */
 }
 
-int count(btree *t)
+int count(bstree *t)
 {
     if (nullptr == t)
         return 0;
@@ -195,16 +195,16 @@ int count(btree *t)
 }
 
 
-void bfs(btree *t)
+void bfs(bstree *t)
 {
-    queue<btree*> Q;
+    queue<bstree*> Q;
 
     if (t != nullptr)
         Q.push(t);
 
     while (!Q.empty()) {
         
-        btree *u = Q.front(); Q.pop();
+        bstree *u = Q.front(); Q.pop();
         // then do something to u
 
         // then visit its children:
@@ -215,7 +215,7 @@ void bfs(btree *t)
     }
 }
 
-void print_line(btree *t)
+void print_line(bstree *t)
 {
     if (t != nullptr) {
         print_line(t->left);
@@ -224,7 +224,7 @@ void print_line(btree *t)
     }
 }
 
-void print_tree(btree *t, int space)
+void print_tree(bstree *t, int space)
 {
     if (t != nullptr) {
         space += 5;
@@ -237,7 +237,7 @@ void print_tree(btree *t, int space)
     }
 }
 
-void print(btree *t, bool tree_like)
+void print(bstree *t, bool tree_like)
 {
     if (tree_like)
         print_tree(t, 0);

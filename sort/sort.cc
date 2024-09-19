@@ -130,6 +130,10 @@ void combsort(int A[], int n)
  * used by garden gnomes to sort their
  * rows of flower pots
  */
+
+
+
+
 void gnomesort(int A[], int n)
 {
     int i = 0;
@@ -143,6 +147,7 @@ void gnomesort(int A[], int n)
         }
     }
 }
+
 
 /*
  * Merge sort
